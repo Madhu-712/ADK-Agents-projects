@@ -2,60 +2,72 @@
 
 This project contains a simple personal assistant agent built using the Google Agent Development Kit (ADK). This agent is based on the "Building AI Agents with ADK: The Foundation" codelab.
 
-## Project Structure
+## Codelab Reference
 
--   `agent.py`: Defines the agent's logic and configuration, including its name, the Large Language Model (LLM) it uses, and its instructions.
--   `.env`: Stores sensitive configurations like `GOOGLE_CLOUD_PROJECT` and `GOOGLE_CLOUD_LOCATION`.
--   `__init__.py`: Initializes the Python module.
+For more detailed information, please refer to the official codelab:
+[Building AI Agents with ADK: The Foundation](https://codelabs.developers.google.com/devsite/codelabs/build-agents-with-adk-foundation?hl=en)
 
 ## Setup and Execution
 
-### 1. Environment Setup
+### 1. Configure Google Cloud Services (Codelab Section 3)
 
-It is recommended to use a Python virtual environment. You can create one using `uv`:
+This project requires Google Cloud services to function.
 
-```bash
-python -m venv .venv
-source .venv/bin/activate
-```
-
-Install the `google-adk` library:
-
-```bash
-pip install google-adk
-```
-
-### 2. Google Cloud Integration
-
-This project requires Google Cloud services to function. You will need to:
-
-1.  **Have a Google Cloud project** with billing enabled.
-2.  **Enable the `aiplatform.googleapis.com` API.**
-3.  **Set up your environment variables** in the `.env` file with your Google Cloud project and location:
-
-    ```
-    GOOGLE_CLOUD_PROJECT=<your-gcp-project-id>
-    GOOGLE_CLOUD_LOCATION=<your-gcp-location>
-    ```
-
-### 3. Running the Agent
-
-You can run the agent in two ways:
-
-*   **In the terminal:**
-
+1.  **Create or select a Google Cloud project.**
+2.  **Enable the Vertex AI API:**
     ```bash
-    python agent.py
+    gcloud services enable aiplatform.googleapis.com
+    ```
+3.  **Set environment variables** for your project ID and location. Open your `~/.bashrc` or `~/.zshrc` file and add the following lines, replacing the placeholder values with your actual project ID and desired location:
+    ```bash
+    export GOOGLE_CLOUD_PROJECT="<your-gcp-project-id>"
+    export GOOGLE_CLOUD_LOCATION="<your-gcp-location>"
+    ```
+    Then, source the file (e.g., `source ~/.bashrc`).
+
+### 2. Create a Python Virtual Environment (Codelab Section 4)
+
+It is recommended to use a Python virtual environment.
+
+1.  **Create a virtual environment:**
+    ```bash
+    python -m venv .venv
+    ```
+2.  **Activate the virtual environment:**
+    ```bash
+    source .venv/bin/activate
+    ```
+3.  **Install the `google-adk` library:**
+    ```bash
+    pip install google-adk
     ```
 
-*   **With the development web UI:**
-    The ADK provides a development web UI for an interactive chat experience. To use it, you'll need to run the agent with the `adk` command-line tool, which is part of the `google-adk` library.
+### 3. Create Your First Agent (Codelab Section 5)
 
+The agent is defined by the files in this project.
+
+-   `agent.py`: Defines the agent's logic and configuration.
+-   `.env`: Can be used to store environment variables (though the codelab recommends setting them in your shell profile).
+-   `__init__.py`: Initializes the Python module.
+
+### 4. Run Your Agent (Codelab Section 6)
+
+You can run the agent directly in your terminal.
+
+```bash
+python agent.py
+```
+
+### 5. Test and Debug with the ADK Web UI (Codelab Section 7)
+
+The ADK provides a development web UI for an interactive chat experience.
+
+1.  **Run the ADK dev server:**
     ```bash
     adk dev --agent-path .
     ```
-
-    This will start a local web server, and you can interact with your agent in your browser.
+2.  **Access the web UI:**
+    Open your browser and navigate to the URL provided by the `adk dev` command (usually `http://localhost:8000`).
 
 ## About AI Agents and ADK
 
